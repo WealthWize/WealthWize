@@ -24,7 +24,6 @@ const Goals = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("data from goals post req: ", data);
         const goalsFromDB = [];
         data.forEach((element) => {
           const existingGoal = goalsFromDB.find(
@@ -50,9 +49,6 @@ const Goals = () => {
   const handleOnChange = (value) => {
     setDropDown(value);
   };
-
-  // console.log('dropDown: ', dropDown)
-  // console.log('goals: ', goals)
 
   return (
     <div className="Goals">
