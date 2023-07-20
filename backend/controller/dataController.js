@@ -1,13 +1,17 @@
-const db = require("../db/sqlmodel");
+const { query } = require('express');
+const db = require('../db/sqlmodel');
 
 const dataController = {};
 
 //savings table
 dataController.savings = async (req, res, next) => {
-  console.log("i am in dataController.savings");
+  console.log('i am in dataController.savings');
   try {
     //change querystr when figured out if we are matching userid or username
-    const querystr = 'SELECT * FROM "public"."savings"';
+    const querystr = `SELECT * FROM "public"."savings" WHERE user_id = 29`;
+    console.log('querystr');
+    console.log(querystr);
+    console.log(req.body);
     const result = await db.query(querystr);
 
     const savingsTable = result.rows;
@@ -29,8 +33,9 @@ dataController.budget = async (req, res, next) => {
   // console.log('i am in dataController.budget');
   try {
     //change querystr when figured out if we are matching userid or username
-    const querystr = 'SELECT * FROM "public"."budget"';
+    const querystr = `SELECT * FROM "public"."budget" WHERE user_id = ${req.body.userID}`;
     const result = await db.query(querystr);
+    console.log('req.body in datacontroller.budget', req.body);
 
     const budgetTable = result.rows;
     // let savingsSum=0;
@@ -39,7 +44,7 @@ dataController.budget = async (req, res, next) => {
     // })
 
     res.locals.budget = budgetTable;
-    //    console.log(res.locals.budget);
+    console.log('res.locals.budget', res.locals.budget);
     return next();
   } catch (err) {
     next(err);
@@ -48,13 +53,14 @@ dataController.budget = async (req, res, next) => {
 
 //savings_goals
 dataController.savings_goals = async (req, res, next) => {
-  // console.log('i am in dataController.savings_goals')
+  console.log('i am in dataController.savings_goals');
   try {
     //change querystr when figured out if we are matching userid or username
-    const querystr = 'SELECT * FROM "public"."savings_goals"';
+    const querystr = `SELECT * FROM "public"."savings_goals" WHERE user_id = ${req.body.userID}`;
     const result = await db.query(querystr);
 
     const savings_goalsTable = result.rows;
+    console.log('saving goals table: ', savings_goalsTable);
     // let savingsSum=0;
     // savingstable.forEach(row=>{
     //     savingsSum+=row.amount;
