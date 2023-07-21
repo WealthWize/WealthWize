@@ -13,7 +13,6 @@ transactionController.rangeOfTransactions = async (req, res, next) => {
     if (!result) {
       next('no db result');
     } else {
-      console.log('----> rangeOfTRansaction results: ', result.rows);
       res.status(200).send(result.rows);
     }
   } catch (err) {
@@ -36,7 +35,6 @@ transactionController.goalTracker = async (req, res, next) => {
     if (!result) {
       next('no db result');
     } else {
-      console.log('----> goalTracker results: ', result.rows);
       res.status(200).send(result.rows);
     }
   } catch (err) {
@@ -45,10 +43,6 @@ transactionController.goalTracker = async (req, res, next) => {
 };
 
 transactionController.budgetSetter = async (req, res, next) => {
-  console.log('-----> budget tracker is running. req.body: ', req.body);
-  console.log('req.body.goalAmount: ', req.body.goalAmount);
-  console.log('req.body.userID:', req.body.userID);
-  console.log('req.body.goalCategory:', req.body.goalCategory);
   try {
     const query = `
         UPDATE budget
@@ -60,7 +54,6 @@ transactionController.budgetSetter = async (req, res, next) => {
     if (!result) {
       next('no db result');
     } else {
-      console.log('----> budget setter results: ', result.rows);
       res.status(200);
     }
   } catch (err) {
