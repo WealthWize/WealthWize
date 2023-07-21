@@ -39,7 +39,6 @@ const Goals = () => {
             });
           }
         });
-        // console.log('goalsFromDB: ', goalsFromDB)
         setGoals(goalsFromDB);
         setDropDown(goalsFromDB[0].category);
       })
@@ -57,7 +56,6 @@ const Goals = () => {
         <select onChange={(e) => handleOnChange(e.target.value)}>
           {goals &&
             goals.map((goal) => {
-              console.log("this is the GOAL", goal);
               return (
                 <>
                   <option>{goal.category}</option>
