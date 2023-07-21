@@ -30,9 +30,8 @@ const Dashboard = ({ username }) => {
       }
     };
     fetchTables();
-
   }, [sidebar]);
-
+  
   return (
     <div className="dashboard">
       <Navbar username={username} />

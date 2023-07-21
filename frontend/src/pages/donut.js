@@ -2,7 +2,6 @@ import Chart from "react-apexcharts";
 import React from "react";
 
 export default function ApexDonut({ goals, dropDown, setReachGoal }) {
-
     const series = [];
 
     goals.map((goal) => {
@@ -14,7 +13,6 @@ export default function ApexDonut({ goals, dropDown, setReachGoal }) {
             series.push(firstVal, secondVal)
         }
     })
-
 
     if (series[0] < 100) {
         setReachGoal(false);
