@@ -8,7 +8,7 @@ dataController.savings = async (req, res, next) => {
   console.log('i am in dataController.savings');
   try {
     //change querystr when figured out if we are matching userid or username
-    const querystr = `SELECT * FROM "public"."savings" WHERE user_id = 29`;
+    const querystr = `SELECT * FROM "public"."savings" WHERE user_id = ${res.locals.userID}`;
     console.log('querystr');
     console.log(querystr);
     console.log(req.body);
@@ -29,11 +29,11 @@ dataController.savings = async (req, res, next) => {
 };
 
 //budget
-dataController.budget = async (req, res, next) => {
+dataController.budget = async (req, resp, next) => {
   // console.log('i am in dataController.budget');
   try {
     //change querystr when figured out if we are matching userid or username
-    const querystr = `SELECT * FROM "public"."budget" WHERE user_id = ${req.body.userID}`;
+    const querystr = `SELECT * FROM "public"."budget" WHERE user_id = ${resp.locals.userID}`;
     const result = await db.query(querystr);
     console.log('req.body in datacontroller.budget', req.body);
 
@@ -43,8 +43,8 @@ dataController.budget = async (req, res, next) => {
     //     savingsSum+=row.amount;
     // })
 
-    res.locals.budget = budgetTable;
-    console.log('res.locals.budget', res.locals.budget);
+    resp.locals.budget = budgetTable;
+    console.log('res.locals.budget', resp.locals.budget);
     return next();
   } catch (err) {
     next(err);
@@ -52,11 +52,11 @@ dataController.budget = async (req, res, next) => {
 };
 
 //savings_goals
-dataController.savings_goals = async (req, res, next) => {
+dataController.savings_goals = async (req, resp, next) => {
   console.log('i am in dataController.savings_goals');
   try {
     //change querystr when figured out if we are matching userid or username
-    const querystr = `SELECT * FROM "public"."savings_goals" WHERE user_id = ${req.body.userID}`;
+    const querystr = `SELECT * FROM "public"."savings_goals" WHERE user_id = ${resp.locals.userID}`;
     const result = await db.query(querystr);
 
     const savings_goalsTable = result.rows;
@@ -66,7 +66,7 @@ dataController.savings_goals = async (req, res, next) => {
     //     savingsSum+=row.amount;
     // })
 
-    res.locals.savings_goals = savings_goalsTable;
+    resp.locals.savings_goals = savings_goalsTable;
     //    console.log(res.locals.savings_goals);
     return next();
   } catch (err) {
@@ -79,8 +79,7 @@ dataController.transactions = async (req, res, next) => {
   // console.log('i am in dataController.transactions')
   try {
     //change querystr when figured out if we are matching userid or username
-    const querystr =
-      'SELECT * FROM "public"."transactions" ORDER BY date LIMIT 100';
+    const querystr = `SELECT * FROM "public"."transactions" WHERE user_id = ${res.locals.userID} ORDER BY date LIMIT 100`;
     const result = await db.query(querystr);
 
     const transactionsTable = result.rows;

@@ -71,9 +71,11 @@ exports.protectRoute = async (req, res, next) => {
 
   //CHECK IS USER FOR THAT TOKEN EXISTS
   const queryStrRetrieve = `SELECT * FROM users WHERE id = '${decoded.user_id}';`;
-  const currUser = await db.query(queryStrRetrieve);
-  if (!currUser) return next('user no longer exists');
+  const resp = await db.query(queryStrRetrieve);
+  if (!resp || resp.rows.length != 1) return next('invalid resP');
   // console.log(currUser);
-  // req.user = currUser;
+  console.log(`Handling resp:`);
+  console.log(resp);
+  res.locals.userID = resp.rows[0].id;
   next();
 };
