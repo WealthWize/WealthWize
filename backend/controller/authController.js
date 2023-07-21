@@ -17,13 +17,8 @@ exports.login = async (req, res, next) => {
     const { username, password } = req.body;
     const queryStr = `SELECT * FROM users WHERE username = '${username}';`;
     const result = await db.query(queryStr);
-<<<<<<< HEAD
     const loginCheck = await bcrypt.compare(password, result.rows[0].password)
     if (loginCheck) {
-=======
-    // await bcrypt.compare(password, result.rows[0].password)
-    if (password === result.rows[0].password) {
->>>>>>> 818b90c02a68aa20d89c0e740da183c13af2e3a8
       res.status(200).json({
         status: "success",
         token: generateToken(result),
@@ -63,10 +58,6 @@ exports.signup = async (req, res, next) => {
   try {
     const { name, username, password } = req.body;
     const hashed = await bcrypt.hash(password, 10);
-<<<<<<< HEAD
-=======
-    // console.log("this is the hashed password", hashed);
->>>>>>> 818b90c02a68aa20d89c0e740da183c13af2e3a8
     const queryStrCreate = `INSERT INTO users (name, username, password) VALUES ('${name}', '${username}', '${hashed}');`;
     await db.query(queryStrCreate);
     const queryStrRetrieve = `SELECT * FROM users WHERE username = '${username}';`;
