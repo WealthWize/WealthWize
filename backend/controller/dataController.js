@@ -30,7 +30,7 @@ dataController.savings = async (req, res, next) => {
 dataController.budget = async (req, res, next) => {
   try {
     //change querystr when figured out if we are matching userid or username
-    const querystr = `SELECT * FROM "public"."budget" WHERE user_id = ${resp.locals.userID}`;
+    const querystr = `SELECT * FROM "public"."budget" WHERE user_id = ${res.locals.userID}`;
     const result = await db.query(querystr);
     console.log('req.body in datacontroller.budget', req.body);
 

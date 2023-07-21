@@ -15,8 +15,9 @@ const Overview = ({ dataTables }) => {
     savings: 0,
   };
   const total = accounts.savings + accounts.checking;
-  // console.log(dataTables.savings);
-
+  console.log('DATA TABLE SAVINGS', dataTables.savings);
+  // const [total, setTotal] = useState(null);
+  // const [accounts, setAccounts] = useState({ checking: 5000, savings: 0 });
   // useEffect(() => {
   //   const fetchSavings = async () => {
   //     try {

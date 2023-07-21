@@ -17,13 +17,14 @@ const Dashboard = ({ username }) => {
   const [sidebar, setSidebar] = useState(false);
   const [rerender, setRerender] = useState(false);
 
-  useEffect(async () => {
+  useEffect(() => {
     const fetchTables = async () => {
       try {
         const response = await fetch('http://localhost:3000/dashboard', {
           headers: { Authorization: `Bearer ${auth.token}` },
         });
         const jsonData = await response.json();
+        console.log(jsonData, 'JSON DATA ABOVE');
         setDataTables({ ...jsonData });
       } catch (error) {
         console.log('error at fetchTables: ', error);
