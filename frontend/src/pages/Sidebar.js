@@ -19,15 +19,15 @@ const Sidebar = ({ setSidebar, setRerender }) => {
   const [expenseSelection, setExpenseSelection] = useState(true);
   const [budgetSelection, setBudgetSelection] = useState(false);
   const [goalSelection, setGoalSelection] = useState(false);
+  const [stockSelection, setStockSelection] = useState(false);
 
   //handle onClick event when expense/goal/ or budget is clicked
   const handleSideBarSelection = (value) => {
     const selected = value;
-    value === "expense"
-      ? setExpenseSelection(true)
-      : setExpenseSelection(false);
+    value === "expense" ? setExpenseSelection(true) : setExpenseSelection(false);
     value === "budget" ? setBudgetSelection(true) : setBudgetSelection(false);
     value === "goal" ? setGoalSelection(true) : setGoalSelection(false);
+    value === "stock" ? setStockSelection(true) : setStockSelection(false);
   };
 
   return (
@@ -61,9 +61,18 @@ const Sidebar = ({ setSidebar, setRerender }) => {
           >
             Goal
           </button>
+          <button
+            className="stock"
+            value="stock"
+            onClick={(e) => handleSideBarSelection(e.target.value)}
+          >
+            Stock
+          </button>
         </div>
-        {expenseSelection && <ExpenseForm setSidebar={setSidebar} setRerender={setRerender}/>}
-        {budgetSelection && <BudgetForm setSidebar={setSidebar}/>}
+        {expenseSelection && (
+          <ExpenseForm setSidebar={setSidebar} setRerender={setRerender} />
+        )}
+        {budgetSelection && <BudgetForm setSidebar={setSidebar} />}
         {goalSelection && <GoalForm setSidebar={setSidebar} />}
       </div>
     </div>

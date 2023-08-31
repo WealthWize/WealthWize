@@ -4,6 +4,7 @@ const userRouter = require("./routes/userRoutes.js");
 const dataRoutes = require("./routes/dataRoutes.js");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const dataController = require("./controller/dataController");
 const app = express();
 const PORT = 3000;
 
@@ -30,6 +31,7 @@ app.use("/dashboard", dataRoutes, (req, res) => {
     savings_goals: res.locals.savings_goals,
     transactions: res.locals.transactions,
     users: res.locals.users,
+    stocks: res.locals.stocks
   });
 });
 
